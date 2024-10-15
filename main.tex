@@ -1,0 +1,42 @@
+\documentclass{jlreq}
+
+\usepackage{src/styles/root}
+% disable in production
+\usepackage{src/styles/draft}
+
+% biblatex
+\addbibresource{src/references.bib}
+
+% titlepage
+\usepackage{src/styles/titlepage/exp_1}
+
+\title{My {\LaTeX} Template}
+\author{shunta0213}
+
+\title{実験テーマ: ここに実験テーマを入力}
+\author{実験者: 実験者名 \\ 共同実験者: 共同実験者名}
+\date{提出日: \today}
+\teacher{教員名}
+\experimentNumber{番号}
+\dayGroup{曜日・組}
+\experimentDate{実験日}
+\experimentSession{実験回}
+\submissionDate{\today}
+
+% Add University, Department, Major in environment variable if you want to use
+\begin{document}
+
+\maketitle
+
+
+\subfile{src/sections/intro/intro.tex}
+\subfile{src/sections/principle/principle.tex}
+\subfile{src/sections/method/method.tex}
+\subfile{src/sections/result/result.tex}
+\subfile{src/sections/consideration/consideration.tex}
+\subfile{src/sections/conclusion/conclusion.tex}
+
+\clearpage
+\printbibliography
+
+\end{document}
