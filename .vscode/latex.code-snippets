@@ -1,0 +1,171 @@
+{
+  // Place your snippets for latex here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  //
+  // begin environment
+  "begin/end": {
+    "prefix": ["@beg", "mbeg"],
+    "body": ["\\begin{${1}}", "$2", "\\end{${1}}", "$0"]
+  },
+  // for built-in math environment
+  "begin/end equation": {
+    "prefix": ["@eq", "eq", "meq"],
+    "body": ["\\begin{equation}", "$1", "\\end{equation}", "$0"]
+  },
+  "begin/end void equation": {
+    "prefix": ["@eqv", "eqv", "meqv"],
+    "body": ["\\begin{equation*}", "$1", "\\end{equation*}", "$0"]
+  },
+  "begin/end aligned": {
+    "prefix": ["@ali", "ali", "mali"],
+    "body": ["\\begin{aligned}", "$0", "\\end{aligned}"]
+  },
+  "begin/end gather": {
+    "prefix": ["@gat", "gat", "mgat"],
+    "body": ["\\begin{gather}", "$0", "\\end{gather}"]
+  },
+  "begin/end gather*": {
+    "prefix": ["@gatv", "gatv", "mgatv", "gav"],
+    "body": ["\\begin{gather*}", "$0", "\\end{gather*}"]
+  },
+  "begin/end cases": {
+    "prefix": ["@cas", "cas", "mcas"],
+    "body": ["\\begin{cases}", "$0", "\\end{cases}"]
+  },
+  "begin/end cases*": {
+    "prefix": ["@casv", "casv", "mcasv", "cav"],
+    "body": ["\\begin{cases*}", "$0", "\\end{cases*}"]
+  },
+  "begin/end enumerate": {
+    "prefix": ["@enu", "enu", "menu", "enm", "menm"],
+    "body": ["\\begin{enumerate}", "$0", "\\end{enumerate}"]
+  },
+  "begin/end enumerate*": {
+    "prefix": ["@enuv", "enuv", "menuv", "enmv", "menmv"],
+    "body": ["\\begin{enumerate*}", "$0", "\\end{enumerate*}"]
+  },
+  "begin/end itemize": {
+    "prefix": ["@itz", "mitz", "itz"],
+    "body": ["\\begin{itemize}", "$0", "\\end{itemize}"]
+  },
+  // for user-defined math environment
+  "begin/end theorem": {
+    "prefix": ["@thm", "mthm", "thm"],
+    "body": ["\\begin{thm}", "$0", "\\end{thm}"]
+  },
+  "begin/end theorem* ": {
+    "prefix": ["@thmv", "mthmv", "mthv", "thmv", "thv"],
+    "body": ["\\begin{thm*}", "$0", "\\end{thm*}"]
+  },
+  "begin/end corollary": {
+    "prefix": ["@cor", "mcor", "cor"],
+    "body": ["\\begin{cor}", "$0", "\\end{cor}"]
+  },
+  "begin/end corollary* ": {
+    "prefix": ["@corv", "corv", "mcorv"],
+    "body": ["\\begin{cor*}", "$0", "\\end{cor*}"]
+  },
+  "begin/end example": {
+    "prefix": ["@ex", "mex", "ex"],
+    "body": ["\\begin{ex}", "$0", "\\fin\\end{ex}"]
+  },
+  "begin/end example* ": {
+    "prefix": ["@exv", "mexv", "exv"],
+    "body": ["\\begin{ex*}", "$0", "\\fin\\end{ex*}"]
+  },
+  "begin/end exercise": {
+    "prefix": ["@exe", "mexe", "exe"],
+    "body": ["\\begin{exe}", "$0", "\\end{exe}"]
+  },
+  "begin/end remark": {
+    "prefix": ["@rem", "rem"],
+    "body": ["\\begin{rem}", "$0", "\\fin\\end{rem}"]
+  },
+  "begin/end remark* ": {
+    "prefix": ["@remv", "remv", "rev"],
+    "body": ["\\begin{rem*}", "$0", "\\fin\\end{rem*}"]
+  },
+  "begin/end definition": {
+    "prefix": ["@dfn", "mdfn", "dfn"],
+    "body": ["\\begin{dfn}", "$0", "\\end{dfn}"]
+  },
+  "begin/end definition*": {
+    "prefix": ["@dfv", "mdfv", "dfv", "mdfnv", "dfnv"],
+    "body": ["\\begin{dfn*}", "$0", "\\end{dfn*}"]
+  },
+  "begin/end proposition": {
+    "prefix": ["@prp", "mprp", "prp"],
+    "body": ["\\begin{prp}", "$0", "\\end{prp}"]
+  },
+  "begin/end proposition*": {
+    "prefix": ["@prpv", "@prv", "prpv", "prv"],
+    "body": ["\\begin{prp*}", "$0", "\\end{prp*}"]
+  },
+  "begin/end lemma": {
+    "prefix": ["@lem", "mlem", "lem"],
+    "body": ["\\begin{lem}", "$0", "\\end{lem}"]
+  },
+  "begin/end lem*": {
+    "prefix": ["@lemv", "@lev", "lemv", "lev"],
+    "body": ["\\begin{lem*}", "$0", "\\end{lem*}"]
+  },
+  "begin/end prf": {
+    "prefix": ["@prf", "mprf", "prf"],
+    "body": ["\\begin{prf}", "$0", "\\end{prf}"]
+  },
+  "Figure": {
+    "prefix": "figure",
+    "body": [
+      "\\begin{figure}[tbp]\\centering",
+      "\\includegraphics[${2:width=\\linewidth}]{$3}",
+      "\\caption{$4}",
+      "\\label{fig:$5}\\vspace{${6:0zh}}",
+      "\\end{figure}"
+    ],
+    "description": "set figure"
+  },
+  "Multi Fig": {
+    "prefix": "mfigure",
+    "body": [
+      "\\begin{figure}[tbp]",
+      "${1:figureitem}",
+      "\\caption{$2}\\label{fig:$3}\\end{figure}"
+    ],
+    "description": "set multi fig. Please use 'mfigitem'"
+  },
+  "Vertical Multi Fig": {
+    "prefix": "vmfigure",
+    "body": [
+      "\\begin{figure}[tbp]\\begin{tabular}{$1}",
+      "  ${2:figureitem}",
+      "  \\end{tabular}",
+      "  \\caption{$3}\\label{fig:$4}",
+      "\\end{figure}"
+    ],
+    "description": "set vertical multi fig. Please use 'mfigitem'"
+  },
+  "Multi fig item": {
+    "prefix": "figureitem",
+    "body": [
+      "\\begin{minipage}[t]{${1:size}\\hsize}\\centering",
+      "  \\includegraphics[${2:width=\\linewidth}]{$3}",
+      "  \\subcaption{$4}",
+      "\\end{minipage}"
+    ],
+    "description": "set multi fig item"
+  },
+
+  //   references
+  "Figure Reference": {
+    "prefix": "figref",
+    "body": "Fig.~\\ref{fig:${1:label}}",
+    "description": "english figure reference"
+  },
+  "E-Table Reference": {
+    "prefix": "tablref",
+    "body": "Table~\\ref{tabl:${1:label}}",
+    "description": "english table reference"
+  }
+}

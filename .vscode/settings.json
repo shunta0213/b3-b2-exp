@@ -16,6 +16,10 @@
   "[latex]": {
     "editor.defaultFormatter": "James-Yu.latex-workshop"
   },
+  // hsnips
+  "hsnips.hsnipsPath": "${workspaceFolder}/.vscode",
+
+  // latex
   "latex-workshop.formatting.latex": "latexindent",
   "latex-workshop.latex.recipe.default": "lualatex",
   "latex-workshop.bibtex-format.sort.enabled": true,
