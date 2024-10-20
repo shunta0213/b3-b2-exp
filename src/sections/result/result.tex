@@ -3,4 +3,117 @@
 
 \section{結果}
 
+
+\subsection{レーザー光による回折強度パターンの測定}
+
+\subsubsection{スリットの形状の計測結果}\label{subsubsec:slit_shape}
+使用したスリットの形状は図\ref{fig:slit_image}の通りである。
+図\ref{subfig:measure}は、画像のピクセルと実際の大きさを対応させるために、最小メモリが \SI{0.01}{mm} の定規をおいて撮影したものである。
+このメモリを用いて、計測すると\SI{0.90}{mm}が\SI{772.093}{pixel}に対応した。
+したがって、\SI{1.17}{um/pixel}であると計算された。
+これを用いて各スリットの形状を計測した結果を表\ref{tab:circle_slit_diameter}、表\ref{tab:ss_slits}、表\ref{tab:ds_slits}に示す。
+
+\input{src/tables/result/slit.tex}
+\input{src/figures/result/slit.tex}
+
+\subsubsection{回折強度パターンの推定}
+\ref{subsubsec:slit_shape}節で計測したスリットの形状をもとに、回折強度パターンを推定した。
+単スリットの場合、光の透過率 \( f(x) \) は簡単のために一次元として
+\begin{equation}
+	f(x) =
+	\begin{cases}
+		1 & \text{if } |x| < a \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{equation}
+と表されるから、このフーリエ変換は
+\begin{equation}\label{eq:single_slit_ft}
+	\begin{aligned}
+		F(k) & = \int_{-\infty}^{\infty} f(x) e^{- 2 \pi i k x } \odif{x}           \\
+		     & = \int_{-a}^{a} e^{- 2\pi i k x} \odif{x}                            \\
+		     & = 2a \cdot \mathrm{sinc} \left( 2\pi a k \right)                     \\
+		     & = 2a \cdot \mathrm{sinc} \left( \dfrac{2\pi a}{\lambda b} k  \right)
+	\end{aligned}
+\end{equation}
+と表される。なお、 \( k \) を \( \dfrac{k}{\lambda b}  \)  と置換した。
+\footnote{
+	\( k \) を \( \frac{k}{\lambda b}  \)と置換するのはやや天下り的である。
+	単スリットであれば、単スリットを無限小に分割し、点波源として考えれば図\ref{fig:single_slit_amp_explain}で、
+	\( r_n(\epsilon) = \sqrt{b^2+ \left( x - \epsilon \right)^2} \approx \left( b + \frac{x^2}{2b} - \frac{x \epsilon}{b}   \right) \) より、
+	スクリーン上の位置\( x \) における振幅 \( A(x) \) は、
+	\begin{equation}
+		\begin{aligned}
+			A(x) & = \int_{-\frac{a}{2}}^{\frac{a}{2}} \dfrac{A_0}{a} \exp \left\{ i \dfrac{2\pi}{\lambda} \left( x - r_n(\epsilon) \right)  \right\} \odif{\epsilon}                                                       \\
+			     & = \exp \left[ i \dfrac{2\pi}{\lambda} \left( b + \dfrac{x^2}{2b}  \right)  \right] \int_{-\frac{a}{2}}^{\frac{a}{2}} \exp \left[ -i \dfrac{2\pi}{\lambda} \dfrac{x \epsilon}{b}  \right] \odif{\epsilon}
+		\end{aligned}
+	\end{equation}
+	となる。したがって、強度 \( I(x) \) は、
+	\begin{equation}
+		\begin{aligned}
+			I(x) & = | A(x) |^2                                                                                                                            \\
+			     & = \left| \int_{-\frac{a}{2}}^{\frac{a}{2}} \exp \left[ i \dfrac{2\pi}{\lambda} \dfrac{x \epsilon}{b}  \right] \odif{\epsilon} \right|^2 \\
+			     & = \left| a \cdot \mathrm{sinc}\left( \dfrac{\pi a}{\lambda b} x  \right)  \right|^2
+		\end{aligned}
+	\end{equation}
+	となり、この式で、 \( a = 2a \), \( x = k \) と置換すると、先の式が得られる。
+}
+また、2重スリットの場合、光の透過率 \( f(x) \) は スリットの幅を \( 2a \) 、スリットの中心座標を \( \pm x_0 \) として
+\begin{equation}
+	f(x) =
+	\begin{cases}
+		1 & \text{if } |x - x_0| < a \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{equation}
+とかけるから、このフーリエ変換はフーリエ変換の性質\( \mathcal{F}[f(x-x_0)] = F(k)\exp \left( -i 2 \pi x_0 k \right) \)を用いて、
+\begin{equation}\label{eq:double_slit_ft}
+	\begin{aligned}
+		F(k) & = 2a \cdot \mathrm{sinc} \left( \dfrac{2\pi a}{\lambda b} k  \right) \exp \left( -i \dfrac{2 \pi x_0}{\lambda b}  k \right) + 2a \cdot \mathrm{sinc} \left( \dfrac{2\pi a}{\lambda b} k  \right) \exp \left( i \dfrac{2 \pi x_0}{\lambda b}  k \right) \\
+		     & = 4a \cos \left( \dfrac{2 \pi x_0}{\lambda b} k \right) \cdot \mathrm{sinc} \left( \dfrac{2\pi a}{\lambda b} k  \right)
+	\end{aligned}
+\end{equation}
+となる。
+
+したがって、単スリットの場合は、谷の間隔\( d \)は
+\begin{equation}\label{eq:single_slit_d}
+	d = \dfrac{\lambda b}{2a}
+\end{equation}
+となる。
+また、二重スリットの場合、 \( \cos  \) の項が \( 0 \) になる場合と、 \( \mathrm{sinc}  \) の項が0になる場合がある。
+前者による谷の間隔 \( d_1 \) と、後者による谷の間隔 \( d_2 \) は、
+\begin{equation}\label{eq:double_slit_d}
+	\begin{aligned}
+		d_1 & = \dfrac{\lambda b}{2x_0} \\
+		d_2 & = \dfrac{\lambda b}{2a}
+	\end{aligned}
+\end{equation}
+となる。
+一般には\( x_0 > a \) であるから、大きいなうねりが単スリットと同様に \( \mathrm{sinc} \) の項により生じ、小さいなうねりが \( \cos \) の項により生じる。
+
+
+コンピュータを用いて円スリット、単スリット、2重スリットに対して、2次元のフーリエ変換を計算し、回折強度パターンをシミュレーションした結果を図\ref{fig:amplitude_sim_circle}、図\ref{fig:amplitude_sim_single}、図\ref{fig:amplitude_sim_dual}に示す。
+
+\input{src/figures/result/signle_slit_amp_explain.tex}
+\input{src/figures/result/estimation.tex}
+
+\subsubsection{回折強度パターンの測定結果}
+実際に使用したレーザーの波長は \SI{632.8}{\nano\meter} 、開口とスクリーンの距離は \SI{96.5}{cm}であった。
+このときに、\ref{subsubsec:slit_shape}節で計測したスリットに対してレーザーを照射し、スクリーンに写った像を撮影した。
+その結果を図\ref{fig:screen_photo}に示す。
+図\ref{subfig:screen_measure}は、画像のピクセルと実際の大きさを対応させるために \SI{15}{cm} の定規をおいて撮影したものである。
+この画像から、\SI{193.00}{pixel}が\SI{3.00}{cm}すなわち、\SI{0.0155}{cm/pixel}であると計算された。
+これをもとに、画像のグレースケールを強度として取り出し、実際の大きさに変換したものを図\ref{fig:amplitude}に示す。
+グレースケールは最大値を1として正規化されている。
+
+
+単スリット・二重スリットの回折強度パターンの谷の間隔は、式\ref{eq:single_slit_d}、式\ref{eq:double_slit_d}から
+表\ref{tab:ss_slit_width}、表\ref{tab:ds_slit_width}のようになった。
+計測値は\ref{subsubsec:slit_shape}で測定されたもの、計算値が上記の式から計算された値である。
+
+\input{src/tables/result/ss_width.tex}
+\input{src/tables/result/ds_width.tex}
+
+\input{src/figures/result/screen.tex}
+\input{src/figures/result/amplitude.tex}
+
 \end{document}

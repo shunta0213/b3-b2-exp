@@ -28,8 +28,9 @@ function math(context) {
 	// comment out below if you would like a more loose math context
 	&& ! context.scopes.some(s => s.startsWith("punctuation.definition.string.begin.latex"))
 	// uncomment below for a more strict math context
-	//&& ! context.scopes.some(s => s.startsWith("punctuation.definition.string.end.latex"))
-	&& ! context.scopes.some(s => s.startsWith("comment"));
+	&& ! context.scopes.some(s => s.startsWith("punctuation.definition.string.end.latex"))
+	&& ! context.scopes.some(s => s.startsWith("comment"))
+	&& ! context.scopes.some(s => s.startsWith("meta.definition.label.latex")) // avoid label context;
 }
 endglobal
 
@@ -64,7 +65,7 @@ endsnippet
 # ker -> \ker
 context math(context)
 priority 1
-snippet `\b(?<!\\)(?<!\\mathrm\{)(le|ge|div|to|not|in|sup|dim|deg|ker|range|grad|rot|Div|rank|diag|det|arg|max|min|argmax|argmin|sin|cos|tan|cot|ln|log|exp|perp|cup|cap|sim|pm|iff|mid|Im|Re|succ|prec|circ|neq|ni|lim|sum|prod|const)` " [HS] Commands space" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(le|ge|div|to|not|int|sup|dim|deg|ker|range|grad|rot|Div|rank|diag|det|arg|max|min|argmax|argmin|sin|cos|tan|cot|ln|log|exp|perp|cup|cap|sim|pm|iff|mid|Im|Re|succ|prec|circ|neq|ni|lim|sum|prod|const|iint|iiint|iiiint)` " [HS] Commands space" A
 `` rv = `\\${m[1]} ` ``
 endsnippet
 
@@ -87,8 +88,8 @@ snippet `lr([\)\]\>\}vV])` " [HS] Left-right" A
 		">"
 	],
 	"}": [
-		"{",
-		"}"
+		"\{",
+		"\}"
 	],
 	"v": [
 		"\\lvert",
@@ -225,18 +226,18 @@ endsnippet
 
 # x__ -> x_{}
 context math(context)
-snippet __ " [HS] Subscript" iA
+snippet `__` " [HS] Subscript" iA
 _{$1} $0
 endsnippet
 
 # xsq -> x^2
 context math(context)
-snippet sq " [HS] Square" A
+snippet `(?<!\\)sq` " [HS] Square" A
 ^2
 endsnippet
 
 context math(context)
-snippet cb " [HS] Cube" A
+snippet `(?<!\\)cb` " [HS] Cube" A
 ^3
 endsnippet
 
@@ -297,6 +298,12 @@ snippet `\b(?<!\\)(?<!\\mathrm\{)(tit|tbf)` " [HS] textit textbf" A
 rv = `${trans[m[1]]}{${snip.tabstop(1)}} ${snip.tabstop(2)}` ``
 endsnippet
 
+
+context math(context)
+snippet `\b(?<!\\)rm` " [HS] mathrm" wA
+\mathrm{${1}}
+endsnippet
+
 context math(context)
 snippet `\b(?<!\\)dsum` " [HS] direct sum" wA
 \\oplus
@@ -318,6 +325,21 @@ snippet `\b(?<!\\)obrace` " [HS] overbrace" wA
 endsnippet
 
 context math(context)
+snippet `\b(?<!\\)oline` " [HS] overline" wA
+\\overline{$0}
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)uline` " [HS] underline" wA
+\\underline{$0}
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)nonum` " [HS] nonumber" wA
+\\nonumber
+endsnippet
+
+context math(context)
 snippet `\b(?<!\\)0z` " [HS] Zero set" wA
 \\{0\\}
 endsnippet
@@ -330,4 +352,14 @@ endsnippet
 context math(context)
 snippet `\b(?<!\\)dsp` " [HS] Displaystyle" wA
 \\displaystyle
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)d([a-zA-Z])` " [HS] Ordinary Differencial" wA
+`` rv = `\\odif{${m[1]}}` ``
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)r([a-zA-Z])` " [HS] Partial Differencial" wA
+`` rv = `\\pdif{${m[1]}}` ``
 endsnippet

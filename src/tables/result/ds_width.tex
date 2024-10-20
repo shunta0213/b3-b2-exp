@@ -1,0 +1,18 @@
+%Please add the following packages if necessary:
+%\usepackage{booktabs, multirow} % for borders and merged ranges
+%\usepackage{soul}% for underlines
+%\usepackage{xcolor,colortbl} % for cell colors
+%\usepackage{changepage,threeparttable} % for wide tables
+%If the table is too wide, replace \begin{table}[!htp]...\end{table} with
+%\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering\begin{threeparttable}[!htb]...\end{threeparttable}\end{adjustwidth}
+\begin{table}[!htp]\centering
+    \caption{二重スリットのスリット間隔と幅}\label{tab:ds_slit_width}
+    \scriptsize
+    \begin{tabular}{ccccc}\toprule
+            & スリット幅 計測値 / \si{\micro\meter} & スリット間隔 計測値 / \si{\micro\meter} & スリット幅 計算値 / \si{\micro\meter} & スリット間隔 計算値 \si{\micro\meter} \\\midrule
+        DS1 & 57.035                        & 152.41                         & 59.825                        & 180.54                       \\
+        DS2 & 82.344                        & 153.49                         & 82.706                        & 197.77                       \\
+        DS3 & 82.187                        & 385.86                         & 84.183                        & 448.97                       \\
+        \bottomrule
+    \end{tabular}
+\end{table}

@@ -12,7 +12,7 @@
   // for built-in math environment
   "begin/end equation": {
     "prefix": ["@eq", "eq", "meq"],
-    "body": ["\\begin{equation}", "$1", "\\end{equation}", "$0"]
+    "body": ["\\begin{equation}", "    $1", "\\end{equation}"]
   },
   "begin/end void equation": {
     "prefix": ["@eqv", "eqv", "meqv"],
@@ -118,10 +118,11 @@
   "Figure": {
     "prefix": "figure",
     "body": [
-      "\\begin{figure}[tbp]\\centering",
+      "\\begin{figure}[htbp]",
+      "\\centering",
       "\\includegraphics[${2:width=\\linewidth}]{$3}",
       "\\caption{$4}",
-      "\\label{fig:$5}\\vspace{${6:0zh}}",
+      "\\label{fig:$5}",
       "\\end{figure}"
     ],
     "description": "set figure"
@@ -129,7 +130,7 @@
   "Multi Fig": {
     "prefix": "mfigure",
     "body": [
-      "\\begin{figure}[tbp]",
+      "\\begin{figure}[htbp]",
       "${1:figureitem}",
       "\\caption{$2}\\label{fig:$3}\\end{figure}"
     ],
@@ -138,7 +139,7 @@
   "Vertical Multi Fig": {
     "prefix": "vmfigure",
     "body": [
-      "\\begin{figure}[tbp]\\begin{tabular}{$1}",
+      "\\begin{figure}[htbp]\\begin{tabular}{$1}",
       "  ${2:figureitem}",
       "  \\end{tabular}",
       "  \\caption{$3}\\label{fig:$4}",
@@ -147,11 +148,11 @@
     "description": "set vertical multi fig. Please use 'mfigitem'"
   },
   "Multi fig item": {
-    "prefix": "figureitem",
+    "prefix": "subfig",
     "body": [
-      "\\begin{minipage}[t]{${1:size}\\hsize}\\centering",
+      "\\begin{minipage}[ht]{${1:0.48}\\hsize}\\centering",
       "  \\includegraphics[${2:width=\\linewidth}]{$3}",
-      "  \\subcaption{$4}",
+      "  \\subcaption{$4}\\label{subfig:$5}",
       "\\end{minipage}"
     ],
     "description": "set multi fig item"
